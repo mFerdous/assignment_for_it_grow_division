@@ -24,6 +24,6 @@ class AuthHeaderProvider extends HeaderProviderImpl {
   Map<String, String> call() {
     return Map.from(super.call())
       ..putIfAbsent(
-          "Authorization", () => "Bearer" + " " + _tokenSource.getToken());
+          "Authorization", () => "Bearer ${_tokenSource.getToken()}");
   }
 }

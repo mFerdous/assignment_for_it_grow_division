@@ -37,5 +37,5 @@ class SignInValidationInitial extends SignInValidationState {}
 class BoolValue extends SignInValidationState {
   final bool value;
 
-  BoolValue(this.value);
+  const BoolValue(this.value);
 }

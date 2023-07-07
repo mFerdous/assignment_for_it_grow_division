@@ -22,5 +22,5 @@ class RegexRes {
 
   
   
-  static RegExp kPassword = RegExp(r'^{6,}$');
+  static RegExp kPassword = RegExp(r'^.{6,}$');
 }

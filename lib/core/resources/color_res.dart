@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ColorRes {
   ColorRes._init();
 
-  // static const kPrimaryColor = Color(0xFF9C9E4B);
-  static const kPrimaryColor = Color(0xFF9456B35);
+  static const kPrimaryColor = Color(0xFF9C9E4B);
+  // static const kPrimaryColor = Color(0xFF9456B35);
   static const kSecondaryColor = Color(0xFF456B35);
 
   static const kBlackColor = Color(0xFF11240A);

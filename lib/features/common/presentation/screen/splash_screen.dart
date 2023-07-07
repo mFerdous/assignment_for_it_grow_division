@@ -31,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     SizeConfig().init(context);
     return Scaffold(
       body: AnimatedSplashScreen(

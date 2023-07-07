@@ -4,7 +4,7 @@ class CommonButton extends StatelessWidget {
   final String buttonName;
   final VoidCallback? onPressed;
 
-  CommonButton({required this.buttonName, this.onPressed});
+  const CommonButton({super.key, required this.buttonName, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +13,14 @@ class CommonButton extends StatelessWidget {
       width: 140,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: Color(0xff3B6491),
+        color: const Color(0xff3B6491),
       ),
       child: MaterialButton(
         onPressed: onPressed,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Text(
           buttonName,
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
     );

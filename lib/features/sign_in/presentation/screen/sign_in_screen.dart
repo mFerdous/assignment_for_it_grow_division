@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
@@ -5,7 +6,6 @@ import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/navigation/route_name.dart';
 import '../../../../core/resources/export_resources.dart';
 import '../../../../core/utils/lang/size_config.dart';
-import '../../../common/presentation/widget/app_bullet_point_text.dart';
 import '../../../common/presentation/widget/app_button.dart';
 import '../../../common/presentation/widget/app_dialog.dart';
 import '../../../common/presentation/widget/app_large_text.dart';
@@ -16,7 +16,6 @@ import '../cubit/sign_in_cubit.dart';
 import '../cubit/sign_in_validation/sign_in_validation_cubit.dart';
 import '../widget/sign_in_password_field.dart';
 import '../widget/sign_in_user_id_field.dart';
-import 'package:flutter/material.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
