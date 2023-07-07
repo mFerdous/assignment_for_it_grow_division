@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:lottie/lottie.dart';
+import 'package:test_task/features/dashboard/presentation/widget/dashboard.dart';
 import '../../../../core/utils/lang/size_config.dart';
 import '../../../sign_in/presentation/screen/sign_in_screen.dart';
 
@@ -18,8 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   getSignInResponse() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      // accessToken = sharedPreferences.getString("access_token");
-      accessToken = sharedPreferences.getString("user_access_token");
+      accessToken = sharedPreferences.getString("access_token");
     });
   }
 
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
         duration: 3000,
         splash: Lottie.asset('assets/json/TrackMattes.json'),
         nextScreen:
-            accessToken == null ? const SignInScreen() : const Text('Test'),
+            accessToken == null ? const SignInScreen() : const Dashboard(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xffffffff),
       ),

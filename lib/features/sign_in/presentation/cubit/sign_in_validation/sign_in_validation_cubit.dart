@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
+import '../../../data/model/partner_sign_in_request.dart';
 import '../../../data/model/sign_in_request.dart';
 import '../formz/password_formz.dart';
 import '../formz/user_id_formz.dart';

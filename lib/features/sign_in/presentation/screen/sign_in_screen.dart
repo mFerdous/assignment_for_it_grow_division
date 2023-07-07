@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:test_task/features/sign_in/presentation/cubit/partner_sign_in_cubit.dart';
 
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/navigation/route_name.dart';
@@ -25,32 +26,60 @@ class SignInScreen extends StatelessWidget {
     SizeConfig().init(context);
 
     return Scaffold(
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<SignInApiCubit, SignInApiState>(
-              listener: (context, state) {
-            if (state is SignInLoading) {
-              showAppLoading(context);
-            } else if (state is SignInFailed) {
-              Navigator.pop(context);
+      body: BlocBuilder<SignInValidationCubit, SignInValidationState>(
+        builder: (context, valState) {
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<SignInApiCubit, SignInApiState>(
+                  listener: (context, state) async {
+                if (state is SignInLoading) {
+                  showAppLoading(context);
+                } else if (state is SignInFailed) {
+                  Navigator.pop(context);
 
-              final ex = state.exception;
-              if (ex is ServerException) {
-                showAppDialog(context, title: ex.message ?? '');
-              } else if (ex is NoInternetException) {
-                showAppDialog(context, title: ErrorMsgRes.kNoInternet);
-              }
-            } else if (state is SignInSucceed) {
-              Navigator.pop(context);
-              final responseModel = state.model;
+                  final ex = state.exception;
+                  if (ex is ServerException) {
+                    showAppDialog(context, title: ex.message ?? '');
+                  } else if (ex is NoInternetException) {
+                    showAppDialog(context, title: ErrorMsgRes.kNoInternet);
+                  }
+                } else if (state is SignInSucceed) {
+                  Navigator.pop(context);
+                  final responseModel = state.model;
 
-              if (responseModel.result == true) {
-                Navigator.pushNamed(context, RouteName.kDashboardRoute);
-              }
-            }
-          })
-        ],
-        child: _buildBody(context),
+                  if (responseModel.result == true) {
+                    await context
+                        .read<PartnerSignInApiCubit>()
+                        .partnerSignIn(valState.getPartnerRequestModel());
+                  }
+                }
+              }),
+              BlocListener<PartnerSignInApiCubit, PartnerSignInApiState>(
+                  listener: (context, pState) async {
+                if (pState is PartnerSignInLoading) {
+                  showAppLoading(context);
+                } else if (pState is PartnerSignInFailed) {
+                  Navigator.pop(context);
+
+                  final ex = pState.exception;
+                  if (ex is ServerException) {
+                    showAppDialog(context, title: ex.message ?? '');
+                  } else if (ex is NoInternetException) {
+                    showAppDialog(context, title: ErrorMsgRes.kNoInternet);
+                  }
+                } else if (pState is PartnerSignInSucceed) {
+                  Navigator.pop(context);
+                  final responseModel = pState.model;
+
+                  if (responseModel.isNotEmpty) {
+                    Navigator.pushNamed(context, RouteName.kDashboardRoute);
+                  }
+                }
+              }),
+            ],
+            child: _buildBody(context),
+          );
+        },
       ),
     );
   }

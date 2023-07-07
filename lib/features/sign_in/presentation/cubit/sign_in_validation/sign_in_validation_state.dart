@@ -28,6 +28,11 @@ class SignInValidationState extends Equatable {
         login: int.parse(userId.value), password: password.value);
   }
 
+  PartnerSignInRequest getPartnerRequestModel() {
+    return PartnerSignInRequest(
+        login: int.parse(userId.value), password: password.value);
+  }
+
   @override
   List<Object> get props => [userId, password, status];
 }

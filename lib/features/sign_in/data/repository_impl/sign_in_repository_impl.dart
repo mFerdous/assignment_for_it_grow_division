@@ -18,7 +18,7 @@ class SignInRepositoryImpl implements SignInRepository {
   );
 
   @override
-  Future<SignInResponse> signin(SignInRequest signInRequest) async {
+  Future<SignInResponse> signIn(SignInRequest signInRequest) async {
     if (!await connectionChecker.isConnected()) throw NoInternetException();
     SignInResponse signInResponse = await signInRemote.signIn(signInRequest);
     await tokenSource.saveToken(signInResponse.token);

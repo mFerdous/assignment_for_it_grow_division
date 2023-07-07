@@ -11,10 +11,16 @@ import 'package:test_task/features/common/domain/repository/locale_repository.da
 import 'package:test_task/features/common/domain/usecase/locale_usecase.dart';
 import 'package:test_task/features/common/presentation/cubit/locale/locale_cubit.dart';
 
+import '../../features/common/data/data_source/local/partner_token_source.dart';
+import '../../features/sign_in/data/remote/partner_sign_in_remote.dart';
 import '../../features/sign_in/data/remote/sign_in_remote.dart';
+import '../../features/sign_in/data/repository_impl/partner_sign_in_repository_impl.dart';
 import '../../features/sign_in/data/repository_impl/sign_in_repository_impl.dart';
+import '../../features/sign_in/domain/repository/partner_sign_in_repository.dart';
 import '../../features/sign_in/domain/repository/sign_in_repository.dart';
+import '../../features/sign_in/domain/usecase/partner_sign_in_usecase.dart';
 import '../../features/sign_in/domain/usecase/sign_in_usecase.dart';
+import '../../features/sign_in/presentation/cubit/partner_sign_in_cubit.dart';
 import '../../features/sign_in/presentation/cubit/sign_in_cubit.dart';
 import '../../features/sign_in/presentation/cubit/sign_in_validation/sign_in_validation_cubit.dart';
 
@@ -42,12 +48,11 @@ class Dependency {
       () => ConnectionCheckerImpl(),
     );
     sl.registerLazySingleton<TokenSource>(() => TokenSourceImpl(sl()));
+    sl.registerLazySingleton<PartnerTokenSource>(() => PartnerTokenSourceImpl(sl()));
     sl.registerLazySingleton<HeaderProvider>(() => HeaderProviderImpl());
     sl.registerLazySingleton(() => AuthHeaderProvider(sl()));
 
 //---------------------------------------------------------//
-
-
 
 //---------------------------Sign In Start-------------------------------//
 
@@ -67,6 +72,24 @@ class Dependency {
     sl.registerFactory(() => SignInValidationCubit());
 
 //---------------------------Sign In End-------------------------------//
+
+//---------------------------Partner Sign In Start-------------------------------//
+
+    sl.registerLazySingleton<PartnerSignInRemote>(
+      () => PartnerSignInRemoteImpl(sl()),
+    );
+
+    sl.registerLazySingleton<PartnerSignInRepository>(
+      () => PartnerSignInRepositoryImpl(
+        sl(),
+        sl(),
+        sl(),
+      ),
+    );
+    sl.registerLazySingleton(() => PartnerSignInUsecase(sl()));
+    sl.registerFactory(() => PartnerSignInApiCubit(partnerSignInUsecase: sl()));
+
+//---------------------------Partner Sign In End-------------------------------//
     
   }
 
@@ -76,6 +99,9 @@ class Dependency {
     ),
     BlocProvider<SignInApiCubit>(
       create: (context) => Dependency.sl<SignInApiCubit>(),
+    ),
+    BlocProvider<PartnerSignInApiCubit>(
+      create: (context) => Dependency.sl<PartnerSignInApiCubit>(),
     ),
     BlocProvider<SignInValidationCubit>(
       create: (context) => Dependency.sl<SignInValidationCubit>(),

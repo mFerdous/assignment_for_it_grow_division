@@ -8,5 +8,5 @@ class SignInUsecase {
   SignInUsecase(this._signInRepository);
 
   Future<SignInResponse> call(SignInRequest signInRequest) =>
-      _signInRepository.signin(signInRequest);
+      _signInRepository.signIn(signInRequest);
 }
