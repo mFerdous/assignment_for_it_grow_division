@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
+import '../../../../profile_info/data/model/profile_info_request.dart';
 import '../../../data/model/partner_sign_in_request.dart';
 import '../../../data/model/sign_in_request.dart';
 import '../formz/password_formz.dart';
@@ -17,7 +20,7 @@ class SignInValidationCubit extends Cubit<SignInValidationState> {
 
     emit(state.copyWith(
       userId: userId,
-      status: Formz.validate([userId, state.password]),
+      status: Formz.validate([userId]),
     ));
   }
 
@@ -26,7 +29,16 @@ class SignInValidationCubit extends Cubit<SignInValidationState> {
 
     emit(state.copyWith(
       password: password,
-      status: Formz.validate([state.userId, password]),
+      status: Formz.validate([password]),
+    ));
+  }
+
+  void changeToken(String value) {
+    final token = PasswordFormz.dirty(value: value);
+
+    emit(state.copyWith(
+      token: token,
+      status: Formz.validate([token]),
     ));
   }
 }

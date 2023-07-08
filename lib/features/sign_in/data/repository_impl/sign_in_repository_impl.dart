@@ -22,6 +22,7 @@ class SignInRepositoryImpl implements SignInRepository {
     if (!await connectionChecker.isConnected()) throw NoInternetException();
     SignInResponse signInResponse = await signInRemote.signIn(signInRequest);
     await tokenSource.saveToken(signInResponse.token);
+    await tokenSource.saveUserId(signInRequest.login.toString());
     return signInResponse;
   }
 }

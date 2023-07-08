@@ -12,6 +12,11 @@ import 'package:test_task/features/common/domain/usecase/locale_usecase.dart';
 import 'package:test_task/features/common/presentation/cubit/locale/locale_cubit.dart';
 
 import '../../features/common/data/data_source/local/partner_token_source.dart';
+import '../../features/profile_info/data/remote/profile_info_remote.dart';
+import '../../features/profile_info/data/repository_impl/profile_info_repository_impl.dart';
+import '../../features/profile_info/domain/repository/profile_info_repository.dart';
+import '../../features/profile_info/domain/usecase/profile_info_usecase.dart';
+import '../../features/profile_info/presentation/cubit/profile_info_cubit.dart';
 import '../../features/sign_in/data/remote/partner_sign_in_remote.dart';
 import '../../features/sign_in/data/remote/sign_in_remote.dart';
 import '../../features/sign_in/data/repository_impl/partner_sign_in_repository_impl.dart';
@@ -23,6 +28,7 @@ import '../../features/sign_in/domain/usecase/sign_in_usecase.dart';
 import '../../features/sign_in/presentation/cubit/partner_sign_in_cubit.dart';
 import '../../features/sign_in/presentation/cubit/sign_in_cubit.dart';
 import '../../features/sign_in/presentation/cubit/sign_in_validation/sign_in_validation_cubit.dart';
+import '../../features/sign_out/presentation/cubit/sign_out_cubit.dart';
 
 class Dependency {
   static final sl = GetIt.instance;
@@ -48,7 +54,8 @@ class Dependency {
       () => ConnectionCheckerImpl(),
     );
     sl.registerLazySingleton<TokenSource>(() => TokenSourceImpl(sl()));
-    sl.registerLazySingleton<PartnerTokenSource>(() => PartnerTokenSourceImpl(sl()));
+    sl.registerLazySingleton<PartnerTokenSource>(
+        () => PartnerTokenSourceImpl(sl()));
     sl.registerLazySingleton<HeaderProvider>(() => HeaderProviderImpl());
     sl.registerLazySingleton(() => AuthHeaderProvider(sl()));
 
@@ -70,6 +77,7 @@ class Dependency {
     sl.registerLazySingleton(() => SignInUsecase(sl()));
     sl.registerFactory(() => SignInApiCubit(signInUsecase: sl()));
     sl.registerFactory(() => SignInValidationCubit());
+    sl.registerFactory(() => SignOutCubit());
 
 //---------------------------Sign In End-------------------------------//
 
@@ -90,7 +98,23 @@ class Dependency {
     sl.registerFactory(() => PartnerSignInApiCubit(partnerSignInUsecase: sl()));
 
 //---------------------------Partner Sign In End-------------------------------//
-    
+
+//---------------------------Profile Info Start-------------------------------//
+
+    sl.registerLazySingleton<ProfileInfoRemote>(
+      () => ProfileInfoRemoteImpl(sl()),
+    );
+
+    sl.registerLazySingleton<ProfileInfoRepository>(
+      () => ProfileInfoRepositoryImpl(
+        sl(),
+        sl(),
+      ),
+    );
+    sl.registerLazySingleton(() => ProfileInfoUsecase(sl()));
+    sl.registerFactory(() => ProfileInfoApiCubit(profileInfoUsecase: sl()));
+
+//---------------------------Profile Info End-------------------------------//
   }
 
   static final providers = <BlocProvider>[
@@ -105,6 +129,12 @@ class Dependency {
     ),
     BlocProvider<SignInValidationCubit>(
       create: (context) => Dependency.sl<SignInValidationCubit>(),
+    ),
+    BlocProvider<SignOutCubit>(
+      create: (context) => Dependency.sl<SignOutCubit>(),
+    ),
+    BlocProvider<ProfileInfoApiCubit>(
+      create: (context) => Dependency.sl<ProfileInfoApiCubit>(),
     ),
   ];
   //cubit

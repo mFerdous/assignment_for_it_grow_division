@@ -5,5 +5,6 @@ class ApiConstants {
   static const partnerBaseUrl = 'https://client-api.contentdatapro.com/api';
 
   static const signInUrl = '/ClientCabinetBasic/IsAccountCredentialsCorrect';
+  static const profileInfoUrl = '/ClientCabinetBasic/GetAccountInformation';
   static const partnerSignInUrl = '/Authentication/RequestMoblieCabinetApiToken';
 }
