@@ -42,4 +42,48 @@ final bnTranslations = {
   "sign-in_idreq": "ইউজার আইডি প্রয়োজন",
   "sign-in_passreq": "পাসওয়ার্ড প্রয়োজন",
   "sign-in_forgot": "আইডি/পাসওয়ার্ড ভুলে গেছেন?",
+
+
+  "profile_info": "প্রোফাইল তথ্য",
+  "address": "ঠিকানা",
+	"balance": "ব্যাল্যান্স",
+	"city": "শহর",
+	"country": "দেশ",
+	"currency": "মুদ্রা",
+	"currentTradesCount": "বর্তমান ট্রেড কাউন্ট",
+	"currentTradesVolume": "বর্তমান ট্রেড ভলিউম",
+	"equity": "ইক্যুইটি",
+	"freeMargin": "বিনামূল্যে মার্জিন",
+	"isAnyOpenTrades": "কোন ওপেন ট্রেড?",
+	"isSwapFree": "সোয়াপ ফ্রি?",
+	"leverage": "লিভারেজ",
+	"name": "নাম",
+	"phone": "ফোন",
+	"totalTradesCount": "মোট ট্রেড কাউন্ট",
+	"totalTradesVolume": "মোট ট্রেড ভলিউম",
+	"type": "প্রকার",
+	"verificationLevel": "যাচাইকরণ স্তর",
+	"zipCode": "জিপ কোড"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };

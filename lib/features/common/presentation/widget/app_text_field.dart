@@ -8,7 +8,7 @@ class AppTextField extends StatelessWidget {
   final String labelText;
   final String? errorText;
   final TextInputType keyboardType;
-  // final String? Function(String?) validator;
+  final bool readOnly;
   final Function(String)? onChange;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -20,7 +20,7 @@ class AppTextField extends StatelessWidget {
     this.errorText,
     this.controller,
     this.keyboardType = TextInputType.text,
-    // this.validator,
+    this.readOnly = false,
     this.onChange,
     this.inputFormatters,
   }) : super(key: key);
@@ -38,6 +38,7 @@ class AppTextField extends StatelessWidget {
             ),
           ),
           child: TextFormField(
+            readOnly: readOnly,
             controller: controller,
 
             onChanged: (value) {

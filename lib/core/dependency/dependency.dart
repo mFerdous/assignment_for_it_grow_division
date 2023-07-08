@@ -12,10 +12,15 @@ import 'package:test_task/features/common/domain/usecase/locale_usecase.dart';
 import 'package:test_task/features/common/presentation/cubit/locale/locale_cubit.dart';
 
 import '../../features/common/data/data_source/local/partner_token_source.dart';
+import '../../features/profile_info/data/remote/last_four_numbers_phone_remote.dart';
 import '../../features/profile_info/data/remote/profile_info_remote.dart';
+import '../../features/profile_info/data/repository_impl/last_four_numbers_phone_repository_impl.dart';
 import '../../features/profile_info/data/repository_impl/profile_info_repository_impl.dart';
+import '../../features/profile_info/domain/repository/last_four_numbers_phone_repository.dart';
 import '../../features/profile_info/domain/repository/profile_info_repository.dart';
+import '../../features/profile_info/domain/usecase/last_four_numbers_phone_usecase.dart';
 import '../../features/profile_info/domain/usecase/profile_info_usecase.dart';
+import '../../features/profile_info/presentation/cubit/last_four_numbers_phone_cubit.dart';
 import '../../features/profile_info/presentation/cubit/profile_info_cubit.dart';
 import '../../features/sign_in/data/remote/partner_sign_in_remote.dart';
 import '../../features/sign_in/data/remote/sign_in_remote.dart';
@@ -115,6 +120,23 @@ class Dependency {
     sl.registerFactory(() => ProfileInfoApiCubit(profileInfoUsecase: sl()));
 
 //---------------------------Profile Info End-------------------------------//
+
+//---------------------------Last Four Numbers Phone Start-------------------------------//
+
+    sl.registerLazySingleton<LastFourNumbersPhoneRemote>(
+      () => LastFourNumbersPhoneRemoteImpl(sl()),
+    );
+
+    sl.registerLazySingleton<LastFourNumbersPhoneRepository>(
+      () => LastFourNumbersPhoneRepositoryImpl(
+        sl(),
+        sl(),
+      ),
+    );
+    sl.registerLazySingleton(() => LastFourNumbersPhoneUsecase(sl()));
+    sl.registerFactory(() => LastFourNumbersPhoneApiCubit(lastFourNumbersPhoneUsecase: sl()));
+
+//---------------------------Last Four Numbers Phone End-------------------------------//
   }
 
   static final providers = <BlocProvider>[
@@ -135,6 +157,9 @@ class Dependency {
     ),
     BlocProvider<ProfileInfoApiCubit>(
       create: (context) => Dependency.sl<ProfileInfoApiCubit>(),
+    ),
+    BlocProvider<LastFourNumbersPhoneApiCubit>(
+      create: (context) => Dependency.sl<LastFourNumbersPhoneApiCubit>(),
     ),
   ];
   //cubit

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -30,7 +29,6 @@ class PartnerSignInRemoteImpl implements PartnerSignInRemote {
     final response = await http.post(Uri.parse(partnerSignInEndpoint),
         body: json.encode(partnerSignInRequest), headers: headers);
     if (response.statusCode == 200) {
-      log(response.body.toString());
       final token = response.body;
       return token;
     } else {

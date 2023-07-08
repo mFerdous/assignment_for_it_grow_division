@@ -7,4 +7,5 @@ class ApiConstants {
   static const signInUrl = '/ClientCabinetBasic/IsAccountCredentialsCorrect';
   static const profileInfoUrl = '/ClientCabinetBasic/GetAccountInformation';
   static const partnerSignInUrl = '/Authentication/RequestMoblieCabinetApiToken';
+  static const lastFourNumberPhoneUrl = '/ClientCabinetBasic/GetLastFourNumbersPhone';
 }

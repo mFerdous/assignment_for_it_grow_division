@@ -38,8 +38,6 @@ class SignInValidationState extends Equatable {
   }
 
   ProfileInfoRequest getProfileInfoRequestModel() {
-    log(userId.value);
-    log(token.value);
     return ProfileInfoRequest(
         login: int.parse(userId.value), token: token.value);
   }

@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
         duration: 3000,
         splash: Lottie.asset('assets/json/TrackMattes.json'),
         nextScreen:
-            accessToken == null ? SignInScreen() : const Dashboard(),
+            accessToken == null ? const SignInScreen() : const Dashboard(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: const Color(0xffffffff),
       ),

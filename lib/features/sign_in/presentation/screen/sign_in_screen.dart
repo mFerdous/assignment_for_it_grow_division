@@ -19,6 +19,8 @@ import '../widget/sign_in_password_field.dart';
 import '../widget/sign_in_user_id_field.dart';
 
 class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
