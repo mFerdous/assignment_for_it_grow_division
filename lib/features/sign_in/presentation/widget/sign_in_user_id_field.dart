@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import '../../../../core/utils/lang/app_localizations.dart';
+import '../../../common/presentation/cubit/validation/validation_cubit.dart';
 import '../../../common/presentation/widget/app_text_field.dart';
-import '../cubit/sign_in_validation/sign_in_validation_cubit.dart';
 
 class SignInUserIdFeild extends StatelessWidget {
   const SignInUserIdFeild({
@@ -13,7 +13,7 @@ class SignInUserIdFeild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInValidationCubit, SignInValidationState>(
+    return BlocBuilder<ValidationCubit, ValidationState>(
         builder: (context, state) {
           return AppTextField(
             keyboardType: TextInputType.number,
@@ -22,7 +22,7 @@ class SignInUserIdFeild extends StatelessWidget {
                 ? 'sign-in_idreq'
                 : state.userId.error?.message,
             onChange: (value) {
-              context.read<SignInValidationCubit>().changeUserId(value);
+              context.read<ValidationCubit>().changeUserId(value);
             },
           );
         });

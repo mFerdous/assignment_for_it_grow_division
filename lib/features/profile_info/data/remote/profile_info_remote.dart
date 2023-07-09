@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -28,6 +29,7 @@ class ProfileInfoRemoteImpl implements ProfileInfoRemote {
 
     final response = await http.post(Uri.parse(profileInfoEndpoint),
         body: json.encode(profileInfoRequest), headers: headers);
+
 
     if (response.statusCode == 200) {
         res = profileInfoResponseFromJson(response.body);

@@ -11,8 +11,8 @@ class ContainerImageBgWrapper extends StatelessWidget {
   const ContainerImageBgWrapper({
     super.key,
     required this.child,
-    this.paddingOuter = const EdgeInsets.all(15.0),
-    this.paddingInner = const EdgeInsets.all(20.0),
+    this.paddingOuter = const EdgeInsets.all(10.0),
+    this.paddingInner = const EdgeInsets.all(10.0),
     this.width,
     this.height,
   });

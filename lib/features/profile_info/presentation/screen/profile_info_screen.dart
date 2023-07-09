@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../../../../core/navigation/route_name.dart';
 import '../../../../core/resources/color_res.dart';
 import '../../../../core/utils/lang/app_localizations.dart';
 import '../../../common/presentation/widget/app_text_field.dart';
@@ -26,16 +27,14 @@ class ProfileInfoScreen extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: ColorRes.kSecondaryColor,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const Dashboard()),
-              (Route<dynamic> route) => false,
-            );
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () {
+            
+        //     Navigator.pushNamed(
+        //       context, RouteName.kDashboardRoute);
+        //   },
+        // ),
         actions: const [
           LanguageSwitchButton(),
           SizedBox(

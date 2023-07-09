@@ -7,14 +7,15 @@ import 'package:test_task/features/sign_in/presentation/cubit/partner_sign_in_cu
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/resources/export_resources.dart';
 import '../../../../core/utils/lang/size_config.dart';
+import '../../../common/presentation/cubit/validation/validation_cubit.dart';
 import '../../../common/presentation/widget/app_button.dart';
 import '../../../common/presentation/widget/app_dialog.dart';
 import '../../../common/presentation/widget/app_large_text.dart';
 import '../../../common/presentation/widget/app_loading.dart';
 import '../../../common/presentation/widget/container_image_bg_wrapper.dart';
 import '../../../common/presentation/widget/language_switch_button.dart';
+import '../../../dashboard/presentation/screen/analytic-signals_screen.dart';
 import '../cubit/sign_in_cubit.dart';
-import '../cubit/sign_in_validation/sign_in_validation_cubit.dart';
 import '../widget/sign_in_password_field.dart';
 import '../widget/sign_in_user_id_field.dart';
 
@@ -26,7 +27,8 @@ class SignInScreen extends StatelessWidget {
     SizeConfig().init(context);
 
     return Scaffold(
-      body: BlocBuilder<SignInValidationCubit, SignInValidationState>(
+      appBar: TransparentAppBar(),
+      body: BlocBuilder<ValidationCubit, ValidationState>(
         builder: (context, valState) {
           return MultiBlocListener(
             listeners: [
@@ -49,7 +51,7 @@ class SignInScreen extends StatelessWidget {
 
                     if (responseModel.result == true) {
                       context
-                          .read<SignInValidationCubit>()
+                          .read<ValidationCubit>()
                           .changeToken(responseModel.token);
                       await context
                           .read<PartnerSignInApiCubit>()
@@ -79,7 +81,8 @@ class SignInScreen extends StatelessWidget {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Dashboard()),
+                            builder: (context) =>
+                                const AnalyticSignalsScreen()),
                         (Route<dynamic> route) => false,
                       );
                     }
@@ -142,7 +145,7 @@ class SignInScreen extends StatelessWidget {
   }
 
   _buildSignInButton() {
-    return BlocBuilder<SignInValidationCubit, SignInValidationState>(
+    return BlocBuilder<ValidationCubit, ValidationState>(
       builder: (context, state) {
         return AppButton(
           title: 'common_sign_in',
@@ -156,6 +159,21 @@ class SignInScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 14),
         );
       },
+    );
+  }
+}
+
+class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor:
+          Colors.transparent, // Make the app bar background transparent
+      elevation: 0, // Remove the app bar shadow
+      // title: Text('Transparent AppBar'),
     );
   }
 }

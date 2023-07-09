@@ -11,7 +11,13 @@ import 'package:test_task/features/common/domain/repository/locale_repository.da
 import 'package:test_task/features/common/domain/usecase/locale_usecase.dart';
 import 'package:test_task/features/common/presentation/cubit/locale/locale_cubit.dart';
 
+import '../../features/common/presentation/cubit/validation/validation_cubit.dart';
 import '../../features/common/data/data_source/local/partner_token_source.dart';
+import '../../features/dashboard/data/remote/analytic_signals_remote.dart';
+import '../../features/dashboard/data/repository_impl/analytic_signals_repository_impl.dart';
+import '../../features/dashboard/domain/repository/analytic_signals_repository.dart';
+import '../../features/dashboard/domain/usecase/analytic_signals_usecase.dart';
+import '../../features/dashboard/presentation/cubit/analytic_signals_cubit.dart';
 import '../../features/profile_info/data/remote/last_four_numbers_phone_remote.dart';
 import '../../features/profile_info/data/remote/profile_info_remote.dart';
 import '../../features/profile_info/data/repository_impl/last_four_numbers_phone_repository_impl.dart';
@@ -32,7 +38,6 @@ import '../../features/sign_in/domain/usecase/partner_sign_in_usecase.dart';
 import '../../features/sign_in/domain/usecase/sign_in_usecase.dart';
 import '../../features/sign_in/presentation/cubit/partner_sign_in_cubit.dart';
 import '../../features/sign_in/presentation/cubit/sign_in_cubit.dart';
-import '../../features/sign_in/presentation/cubit/sign_in_validation/sign_in_validation_cubit.dart';
 import '../../features/sign_out/presentation/cubit/sign_out_cubit.dart';
 
 class Dependency {
@@ -81,7 +86,7 @@ class Dependency {
     );
     sl.registerLazySingleton(() => SignInUsecase(sl()));
     sl.registerFactory(() => SignInApiCubit(signInUsecase: sl()));
-    sl.registerFactory(() => SignInValidationCubit());
+    sl.registerFactory(() => ValidationCubit());
     sl.registerFactory(() => SignOutCubit());
 
 //---------------------------Sign In End-------------------------------//
@@ -137,6 +142,23 @@ class Dependency {
     sl.registerFactory(() => LastFourNumbersPhoneApiCubit(lastFourNumbersPhoneUsecase: sl()));
 
 //---------------------------Last Four Numbers Phone End-------------------------------//
+
+//---------------------------Analytic Signals Start-------------------------------//
+
+    sl.registerLazySingleton<AnalyticSignalsRemote>(
+      () => AnalyticSignalsRemoteImpl(),
+    );
+
+    sl.registerLazySingleton<AnalyticSignalsRepository>(
+      () => AnalyticSignalsRepositoryImpl(
+        sl(),
+        sl(),
+      ),
+    );
+    sl.registerLazySingleton(() => AnalyticSignalsUsecase(sl()));
+    sl.registerFactory(() => AnalyticSignalsApiCubit(analyticSignalsUsecase: sl()));
+
+//---------------------------Analytic Signals End-------------------------------//
   }
 
   static final providers = <BlocProvider>[
@@ -149,8 +171,8 @@ class Dependency {
     BlocProvider<PartnerSignInApiCubit>(
       create: (context) => Dependency.sl<PartnerSignInApiCubit>(),
     ),
-    BlocProvider<SignInValidationCubit>(
-      create: (context) => Dependency.sl<SignInValidationCubit>(),
+    BlocProvider<ValidationCubit>(
+      create: (context) => Dependency.sl<ValidationCubit>(),
     ),
     BlocProvider<SignOutCubit>(
       create: (context) => Dependency.sl<SignOutCubit>(),
@@ -160,6 +182,9 @@ class Dependency {
     ),
     BlocProvider<LastFourNumbersPhoneApiCubit>(
       create: (context) => Dependency.sl<LastFourNumbersPhoneApiCubit>(),
+    ),
+    BlocProvider<AnalyticSignalsApiCubit>(
+      create: (context) => Dependency.sl<AnalyticSignalsApiCubit>(),
     ),
   ];
   //cubit

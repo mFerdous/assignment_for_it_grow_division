@@ -62,5 +62,7 @@ final enTranslations = {
   "totalTradesVolume": "	Total Trades Volume",
   "type": "	Type",
   "verificationLevel": "	Verification Level",
-  "zipCode": "	Zip Code"
+  "zipCode": "	Zip Code",
+
+  "currency_pairs": "Currency Pairs"
 };

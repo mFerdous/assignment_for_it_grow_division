@@ -63,7 +63,10 @@ final bnTranslations = {
 	"totalTradesVolume": "মোট ট্রেড ভলিউম",
 	"type": "প্রকার",
 	"verificationLevel": "যাচাইকরণ স্তর",
-	"zipCode": "জিপ কোড"
+	"zipCode": "জিপ কোড",
+
+  "currency_pairs": "মুদ্রা পেয়ার"
+
 
 
 

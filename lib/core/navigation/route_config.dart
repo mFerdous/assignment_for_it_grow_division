@@ -46,6 +46,6 @@ class RouteConfig {
   }
 
   static MaterialPageRoute _getDashboardRoute() {
-    return _routeBuilder(const Dashboard());
+    return _routeBuilder(Dashboard());
   }
 }
