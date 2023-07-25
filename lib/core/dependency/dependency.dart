@@ -18,6 +18,11 @@ import '../../features/dashboard/data/repository_impl/analytic_signals_repositor
 import '../../features/dashboard/domain/repository/analytic_signals_repository.dart';
 import '../../features/dashboard/domain/usecase/analytic_signals_usecase.dart';
 import '../../features/dashboard/presentation/cubit/analytic_signals_cubit.dart';
+import '../../features/open_trades/data/remote/open_trades_remote.dart';
+import '../../features/open_trades/data/repository_impl/open_trades_repository_impl.dart';
+import '../../features/open_trades/domain/repository/open_trades_repository.dart';
+import '../../features/open_trades/domain/usecase/open_trades_usecase.dart';
+import '../../features/open_trades/presentation/cubit/open_trades_cubit.dart';
 import '../../features/profile_info/data/remote/last_four_numbers_phone_remote.dart';
 import '../../features/profile_info/data/remote/profile_info_remote.dart';
 import '../../features/profile_info/data/repository_impl/last_four_numbers_phone_repository_impl.dart';
@@ -28,15 +33,10 @@ import '../../features/profile_info/domain/usecase/last_four_numbers_phone_useca
 import '../../features/profile_info/domain/usecase/profile_info_usecase.dart';
 import '../../features/profile_info/presentation/cubit/last_four_numbers_phone_cubit.dart';
 import '../../features/profile_info/presentation/cubit/profile_info_cubit.dart';
-import '../../features/sign_in/data/remote/partner_sign_in_remote.dart';
 import '../../features/sign_in/data/remote/sign_in_remote.dart';
-import '../../features/sign_in/data/repository_impl/partner_sign_in_repository_impl.dart';
 import '../../features/sign_in/data/repository_impl/sign_in_repository_impl.dart';
-import '../../features/sign_in/domain/repository/partner_sign_in_repository.dart';
 import '../../features/sign_in/domain/repository/sign_in_repository.dart';
-import '../../features/sign_in/domain/usecase/partner_sign_in_usecase.dart';
 import '../../features/sign_in/domain/usecase/sign_in_usecase.dart';
-import '../../features/sign_in/presentation/cubit/partner_sign_in_cubit.dart';
 import '../../features/sign_in/presentation/cubit/sign_in_cubit.dart';
 import '../../features/sign_out/presentation/cubit/sign_out_cubit.dart';
 
@@ -91,24 +91,6 @@ class Dependency {
 
 //---------------------------Sign In End-------------------------------//
 
-//---------------------------Partner Sign In Start-------------------------------//
-
-    sl.registerLazySingleton<PartnerSignInRemote>(
-      () => PartnerSignInRemoteImpl(sl()),
-    );
-
-    sl.registerLazySingleton<PartnerSignInRepository>(
-      () => PartnerSignInRepositoryImpl(
-        sl(),
-        sl(),
-        sl(),
-      ),
-    );
-    sl.registerLazySingleton(() => PartnerSignInUsecase(sl()));
-    sl.registerFactory(() => PartnerSignInApiCubit(partnerSignInUsecase: sl()));
-
-//---------------------------Partner Sign In End-------------------------------//
-
 //---------------------------Profile Info Start-------------------------------//
 
     sl.registerLazySingleton<ProfileInfoRemote>(
@@ -159,6 +141,23 @@ class Dependency {
     sl.registerFactory(() => AnalyticSignalsApiCubit(analyticSignalsUsecase: sl()));
 
 //---------------------------Analytic Signals End-------------------------------//
+
+//---------------------------Open Trades Start-------------------------------//
+
+    sl.registerLazySingleton<OpenTradesRemote>(
+      () => OpenTradesRemoteImpl(sl()),
+    );
+
+    sl.registerLazySingleton<OpenTradesRepository>(
+      () => OpenTradesRepositoryImpl(
+        sl(),
+        sl(),
+      ),
+    );
+    sl.registerLazySingleton(() => OpenTradesUsecase(sl()));
+    sl.registerFactory(() => OpenTradesApiCubit(openTradesUsecase: sl()));
+
+//---------------------------Open Trades End-------------------------------//
   }
 
   static final providers = <BlocProvider>[
@@ -167,9 +166,6 @@ class Dependency {
     ),
     BlocProvider<SignInApiCubit>(
       create: (context) => Dependency.sl<SignInApiCubit>(),
-    ),
-    BlocProvider<PartnerSignInApiCubit>(
-      create: (context) => Dependency.sl<PartnerSignInApiCubit>(),
     ),
     BlocProvider<ValidationCubit>(
       create: (context) => Dependency.sl<ValidationCubit>(),
@@ -185,6 +181,9 @@ class Dependency {
     ),
     BlocProvider<AnalyticSignalsApiCubit>(
       create: (context) => Dependency.sl<AnalyticSignalsApiCubit>(),
+    ),
+    BlocProvider<OpenTradesApiCubit>(
+      create: (context) => Dependency.sl<OpenTradesApiCubit>(),
     ),
   ];
   //cubit

@@ -64,5 +64,6 @@ final enTranslations = {
   "verificationLevel": "	Verification Level",
   "zipCode": "	Zip Code",
 
-  "currency_pairs": "Currency Pairs"
+  "currency_pairs": "Currency Pairs",
+  "open_trades": "Open Trades",
 };

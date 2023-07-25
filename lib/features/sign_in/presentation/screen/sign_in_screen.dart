@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:test_task/features/dashboard/presentation/widget/dashboard.dart';
-import 'package:test_task/features/sign_in/presentation/cubit/partner_sign_in_cubit.dart';
+import 'package:test_task/core/navigation/route_name.dart';
 
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/resources/export_resources.dart';
@@ -14,7 +13,9 @@ import '../../../common/presentation/widget/app_large_text.dart';
 import '../../../common/presentation/widget/app_loading.dart';
 import '../../../common/presentation/widget/container_image_bg_wrapper.dart';
 import '../../../common/presentation/widget/language_switch_button.dart';
-import '../../../dashboard/presentation/screen/analytic-signals_screen.dart';
+import '../../../profile_info/presentation/cubit/last_four_numbers_phone_cubit.dart';
+import '../../../profile_info/presentation/cubit/profile_info_cubit.dart';
+import '../../../profile_info/presentation/screen/profile_info_screen.dart';
 import '../cubit/sign_in_cubit.dart';
 import '../widget/sign_in_password_field.dart';
 import '../widget/sign_in_user_id_field.dart';
@@ -50,41 +51,11 @@ class SignInScreen extends StatelessWidget {
                     final responseModel = state.model;
 
                     if (responseModel.result == true) {
-                      context
-                          .read<ValidationCubit>()
-                          .changeToken(responseModel.token);
-                      await context
-                          .read<PartnerSignInApiCubit>()
-                          .partnerSignIn(valState.getPartnerRequestModel());
-                    }
-                  }
-                },
-              ),
-              BlocListener<PartnerSignInApiCubit, PartnerSignInApiState>(
-                listener: (context, pState) async {
-                  if (pState is PartnerSignInLoading) {
-                    showAppLoading(context);
-                  } else if (pState is PartnerSignInFailed) {
-                    Navigator.pop(context);
+                      Navigator.pushNamed(context, RouteName.kProfileRoute);
 
-                    final ex = pState.exception;
-                    if (ex is ServerException) {
-                      showAppDialog(context, title: ex.message ?? '');
-                    } else if (ex is NoInternetException) {
-                      showAppDialog(context, title: ErrorMsgRes.kNoInternet);
-                    }
-                  } else if (pState is PartnerSignInSucceed) {
-                    Navigator.pop(context);
-                    final responseModel = pState.model;
-
-                    if (responseModel.isNotEmpty) {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const AnalyticSignalsScreen()),
-                        (Route<dynamic> route) => false,
-                      );
+                      // await context
+                      //     .read<ProfileInfoApiCubit>()
+                      //     .profileInfo(valState.getProfileInfoRequestModel());
                     }
                   }
                 },
@@ -98,11 +69,8 @@ class SignInScreen extends StatelessWidget {
   }
 
   _buildBody(BuildContext context) {
-    return ContainerImageBgWrapper(
-      height: SizeConfig.screenHeight,
-      //  -
-      //     (kToolbarHeight + SizeConfig.screenPadding.top),
-      width: double.infinity,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         children: [
           Row(

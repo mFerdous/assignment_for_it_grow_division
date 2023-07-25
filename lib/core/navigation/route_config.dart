@@ -3,7 +3,8 @@ import 'package:test_task/core/navigation/route_name.dart';
 import 'package:test_task/features/sign_in/presentation/screen/sign_in_screen.dart';
 
 import '../../features/common/presentation/screen/splash_screen.dart';
-import '../../features/dashboard/presentation/widget/dashboard.dart';
+import '../../features/open_trades/presentation/screen/open_trades_screen.dart';
+import '../../features/profile_info/presentation/screen/profile_info_screen.dart';
 
 class RouteConfig {
   Route routes(RouteSettings routeSettings) {
@@ -12,8 +13,10 @@ class RouteConfig {
         return _buildLandingScreen();
       case RouteName.kSignInRoute:
         return _getSignInRoute();
-      case RouteName.kDashboardRoute:
-        return _getDashboardRoute();
+      case RouteName.kProfileRoute:
+        return _getProfileRoute();
+      case RouteName.kOpenTradeRoute:
+        return _getOpenTradeRoute();
     }
     return _defaultRoute();
   }
@@ -45,7 +48,11 @@ class RouteConfig {
     return _routeBuilder(const SignInScreen());
   }
 
-  static MaterialPageRoute _getDashboardRoute() {
-    return _routeBuilder(Dashboard());
+  static MaterialPageRoute _getProfileRoute() {
+    return _routeBuilder(ProfileInfoScreen());
+  }
+
+  static MaterialPageRoute _getOpenTradeRoute() {
+    return _routeBuilder(OpenTradesScreen());
   }
 }

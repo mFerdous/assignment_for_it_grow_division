@@ -14,8 +14,7 @@ abstract class SignInRemote {
 }
 
 class SignInRemoteImpl implements SignInRemote {
-  static const signInEndpoint =
-      ApiConstants.baseUrl + ApiConstants.signInUrl;
+  static const signInEndpoint = ApiConstants.baseUrl + ApiConstants.signInUrl;
   final HeaderProvider _headerProvider;
 
   SignInRemoteImpl(this._headerProvider);
@@ -30,8 +29,8 @@ class SignInRemoteImpl implements SignInRemote {
         body: json.encode(signInRequest), headers: headers);
 
     if (response.statusCode == 200) {
-        res = signInResponseFromJson(response.body);
-        return res;
+      res = signInResponseFromJson(response.body);
+      return res;
     } else {
       throw ServerException(
         message: ErrorMsgRes.kServerError,

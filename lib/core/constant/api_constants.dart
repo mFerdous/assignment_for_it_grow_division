@@ -10,4 +10,5 @@ class ApiConstants {
   static const partnerSignInUrl = '/Authentication/RequestMoblieCabinetApiToken';
   static const lastFourNumberPhoneUrl = '/ClientCabinetBasic/GetLastFourNumbersPhone';
   static const analyticSignalsUrl = '/clientmobile/GetAnalyticSignals';
+  static const openTradesUrl = '/ClientCabinetBasic/GetOpenTrades';
 }

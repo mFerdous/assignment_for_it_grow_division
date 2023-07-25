@@ -14,5 +14,6 @@ class ColorRes {
   // static const kStatusBar = Color(0xFF8E903D);
   static const kStatusBar = Color(0xFF456B35);
   static const kButtonBG = Color(0xff6B959F);
+  static const kOrange = Color(0xffff914d);
 }
  

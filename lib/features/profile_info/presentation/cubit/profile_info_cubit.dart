@@ -2,7 +2,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../data/model/profile_info_request.dart';
 import '../../data/model/profile_info_response.dart';
 import '../../domain/usecase/profile_info_usecase.dart';
 
@@ -15,11 +14,11 @@ class ProfileInfoApiCubit extends Cubit<ProfileInfoApiState> {
     required this.profileInfoUsecase,
   }) : super(ProfileInfoApiInitial());
 
-  Future<void> profileInfo(ProfileInfoRequest requestModel) async {
+  Future<void> profileInfo() async {
     try {
       emit(ProfileInfoLoading());
 
-      final responseModel = await profileInfoUsecase(requestModel);
+      final responseModel = await profileInfoUsecase();
 
       emit(ProfileInfoSucceed(model: responseModel));
     } catch (ex, strackTrace) {

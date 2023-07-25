@@ -4,11 +4,11 @@ import 'package:test_task/core/resources/export_resources.dart';
 import 'package:test_task/features/common/presentation/cubit/locale/locale_cubit.dart';
 
 class LanguageSwitchButton extends StatelessWidget {
-  final selectedBgColor = ColorRes.kButtonBG;
+  final selectedBgColor = ColorRes.kOrange;
   final unselectedBgColor = const Color(0xFFFFE7C0);
 
   final unselectedTextColor = ColorRes.kSecondaryColor;
-  final selectedTextColor = const Color(0xFF4F4F4F);
+  final selectedTextColor = const Color(0xFF000000);
 
   const LanguageSwitchButton({Key? key}) : super(key: key);
 

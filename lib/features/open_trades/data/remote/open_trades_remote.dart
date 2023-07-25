@@ -7,37 +7,37 @@ import '../../../../core/constant/api_constants.dart';
 import '../../../../core/exceptions/exceptions.dart';
 import '../../../../core/header_provider/header_provider.dart';
 import '../../../../core/resources/error_msg_res.dart';
-import '../model/profile_info_response.dart';
+import '../model/open_trades_response.dart';
 
-abstract class ProfileInfoRemote {
-  Future<ProfileInfoResponse> profileInfo();
+abstract class OpenTradesRemote {
+  Future<List<OpenTradesResponse>> openTrades();
 }
 
-class ProfileInfoRemoteImpl implements ProfileInfoRemote {
-  static const profileInfoEndpoint =
-      ApiConstants.baseUrl + ApiConstants.profileInfoUrl;
+class OpenTradesRemoteImpl implements OpenTradesRemote {
+  static const openTradesEndpoint =
+      ApiConstants.baseUrl + ApiConstants.openTradesUrl;
   final HeaderProvider _headerProvider;
 
-  ProfileInfoRemoteImpl(this._headerProvider);
+  OpenTradesRemoteImpl(this._headerProvider);
 
   @override
-  Future<ProfileInfoResponse> profileInfo() async {
-    ProfileInfoResponse res;
+  Future<List<OpenTradesResponse>> openTrades() async {
+    List<OpenTradesResponse> res;
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String userId = sharedPreferences.getString("user_id")!;
     String token = sharedPreferences.getString("access_token")!;
 
-    var profileInfoRequest = {'login': userId, 'token': token};
+    var openTradesRequest = {'login': userId, 'token': token};
 
     final headers = _headerProvider();
 
-    final response = await http.post(Uri.parse(profileInfoEndpoint),
-        body: json.encode(profileInfoRequest), headers: headers);
+    final response = await http.post(Uri.parse(openTradesEndpoint),
+        body: json.encode(openTradesRequest), headers: headers);
 
-    print(response.body);
     if (response.statusCode == 200) {
-      res = profileInfoResponseFromJson(response.body);
+      
+      res = openTradesResponseFromJson(response.body);
       return res;
     } else {
       throw ServerException(

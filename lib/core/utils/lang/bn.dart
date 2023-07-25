@@ -65,28 +65,6 @@ final bnTranslations = {
 	"verificationLevel": "যাচাইকরণ স্তর",
 	"zipCode": "জিপ কোড",
 
-  "currency_pairs": "মুদ্রা পেয়ার"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "currency_pairs": "মুদ্রা পেয়ার",
+  "open_trades": "ওপেন ট্রেডস"
 };
