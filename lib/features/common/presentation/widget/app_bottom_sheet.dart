@@ -47,7 +47,6 @@ class AppBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final isExpand = items.length > 7;
 
-    log('$items');
 
     return isExpand
         ? SizedBox(

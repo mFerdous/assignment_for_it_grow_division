@@ -66,5 +66,6 @@ final bnTranslations = {
 	"zipCode": "জিপ কোড",
 
   "currency_pairs": "মুদ্রা পেয়ার",
-  "open_trades": "ওপেন ট্রেডস"
+  "open_trades": "ওপেন ট্রেডস",
+  "total_profit": "মোট লাভ",
 };

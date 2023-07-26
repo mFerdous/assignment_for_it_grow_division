@@ -37,7 +37,6 @@ class AnalyticSignalsRemoteImpl implements AnalyticSignalsRemote {
     };
 
     final response = await http.get(Uri.parse(url), headers: headers);
-    log(response.body.toString());
 
     if (response.statusCode == 200) {
       res = analyticSignalsResponseFromJson(response.body);

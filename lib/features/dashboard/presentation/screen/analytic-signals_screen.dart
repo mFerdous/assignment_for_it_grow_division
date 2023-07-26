@@ -68,7 +68,6 @@
 //         case AnalyticSignalsSucceed:
 //           List analyticSignalsResponse =
 //               (state as AnalyticSignalsSucceed).model;
-//           // log(json.encode(analyticSignalsResponse));
 //           return Dashboard(
 //             analyticSignalsResponse: analyticSignalsResponse,
 //           );

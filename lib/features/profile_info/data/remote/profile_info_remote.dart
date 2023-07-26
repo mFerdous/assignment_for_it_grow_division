@@ -35,7 +35,6 @@ class ProfileInfoRemoteImpl implements ProfileInfoRemote {
     final response = await http.post(Uri.parse(profileInfoEndpoint),
         body: json.encode(profileInfoRequest), headers: headers);
 
-    print(response.body);
     if (response.statusCode == 200) {
       res = profileInfoResponseFromJson(response.body);
       return res;
