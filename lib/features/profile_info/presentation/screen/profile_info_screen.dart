@@ -11,7 +11,6 @@ import '../../../../core/utils/lang/app_localizations.dart';
 import '../../../common/presentation/widget/app_loading.dart';
 import '../../../common/presentation/widget/app_text_field.dart';
 import '../../../common/presentation/widget/drawer.dart';
-import '../../../common/presentation/widget/language_switch_button.dart';
 import '../../../sign_out/presentation/cubit/sign_out_cubit.dart';
 import '../cubit/profile_info_cubit.dart';
 

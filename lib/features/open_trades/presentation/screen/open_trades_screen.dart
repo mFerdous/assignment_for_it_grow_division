@@ -32,8 +32,6 @@ class _OpenTradesScreenState extends State<OpenTradesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context).locale.languageCode;
-    // isLangBangla = locale.contains('bn');
 
     return BlocBuilder<OpenTradesApiCubit, OpenTradesApiState>(
         builder: (ctx, OpenTradesApiState state) {

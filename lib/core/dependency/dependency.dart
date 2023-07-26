@@ -13,11 +13,6 @@ import 'package:test_task/features/common/presentation/cubit/locale/locale_cubit
 
 import '../../features/common/presentation/cubit/validation/validation_cubit.dart';
 import '../../features/common/data/data_source/local/partner_token_source.dart';
-import '../../features/dashboard/data/remote/analytic_signals_remote.dart';
-import '../../features/dashboard/data/repository_impl/analytic_signals_repository_impl.dart';
-import '../../features/dashboard/domain/repository/analytic_signals_repository.dart';
-import '../../features/dashboard/domain/usecase/analytic_signals_usecase.dart';
-import '../../features/dashboard/presentation/cubit/analytic_signals_cubit.dart';
 import '../../features/open_trades/data/remote/open_trades_remote.dart';
 import '../../features/open_trades/data/repository_impl/open_trades_repository_impl.dart';
 import '../../features/open_trades/domain/repository/open_trades_repository.dart';
@@ -125,23 +120,6 @@ class Dependency {
 
 //---------------------------Last Four Numbers Phone End-------------------------------//
 
-//---------------------------Analytic Signals Start-------------------------------//
-
-    sl.registerLazySingleton<AnalyticSignalsRemote>(
-      () => AnalyticSignalsRemoteImpl(),
-    );
-
-    sl.registerLazySingleton<AnalyticSignalsRepository>(
-      () => AnalyticSignalsRepositoryImpl(
-        sl(),
-        sl(),
-      ),
-    );
-    sl.registerLazySingleton(() => AnalyticSignalsUsecase(sl()));
-    sl.registerFactory(() => AnalyticSignalsApiCubit(analyticSignalsUsecase: sl()));
-
-//---------------------------Analytic Signals End-------------------------------//
-
 //---------------------------Open Trades Start-------------------------------//
 
     sl.registerLazySingleton<OpenTradesRemote>(
@@ -178,9 +156,6 @@ class Dependency {
     ),
     BlocProvider<LastFourNumbersPhoneApiCubit>(
       create: (context) => Dependency.sl<LastFourNumbersPhoneApiCubit>(),
-    ),
-    BlocProvider<AnalyticSignalsApiCubit>(
-      create: (context) => Dependency.sl<AnalyticSignalsApiCubit>(),
     ),
     BlocProvider<OpenTradesApiCubit>(
       create: (context) => Dependency.sl<OpenTradesApiCubit>(),
