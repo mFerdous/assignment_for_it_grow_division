@@ -67,4 +67,5 @@ final enTranslations = {
   "currency_pairs": "Currency Pairs",
   "open_trades": "Open Trades",
   "total_profit": "Total Profit",
+  "promo_campaign": "Promotional Campaign"
 };

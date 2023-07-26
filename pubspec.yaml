@@ -48,6 +48,9 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   formz: ^0.4.0
   lottie: ^2.4.0
+  xml: ^6.3.0
+  flutter_html: ^3.0.0-beta.2
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

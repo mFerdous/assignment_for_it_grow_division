@@ -5,6 +5,7 @@ import 'package:test_task/features/sign_in/presentation/screen/sign_in_screen.da
 import '../../features/common/presentation/screen/splash_screen.dart';
 import '../../features/open_trades/presentation/screen/open_trades_screen.dart';
 import '../../features/profile_info/presentation/screen/profile_info_screen.dart';
+import '../../features/promo_campaign/presentation/promo_campaign_screen.dart';
 
 class RouteConfig {
   Route routes(RouteSettings routeSettings) {
@@ -17,6 +18,8 @@ class RouteConfig {
         return _getProfileRoute();
       case RouteName.kOpenTradeRoute:
         return _getOpenTradeRoute();
+      case RouteName.kPromoCampaignsRoute:
+        return _getPromoCampaignsRoute();
     }
     return _defaultRoute();
   }
@@ -54,5 +57,9 @@ class RouteConfig {
 
   static MaterialPageRoute _getOpenTradeRoute() {
     return _routeBuilder(OpenTradesScreen());
+  }
+
+  static MaterialPageRoute _getPromoCampaignsRoute() {
+    return _routeBuilder(PromoCampaignsScreen());
   }
 }

@@ -4,6 +4,7 @@ import 'package:test_task/features/common/presentation/widget/language_switch_bu
 
 import '../../../../core/navigation/route_name.dart';
 import '../../../../core/resources/color_res.dart';
+import '../../../../core/utils/lang/app_localizations.dart';
 import '../../../sign_out/presentation/cubit/sign_out_cubit.dart';
 
 class DrawerWidgets extends StatelessWidget {
@@ -61,7 +62,8 @@ class DrawerWidgets extends StatelessWidget {
                             Expanded(
                               flex: 6,
                               child: Text(
-                                "Sign Out",
+                                AppLocalizations.of(context)
+                                    .translate('common_sign_out'),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -85,8 +87,39 @@ class DrawerWidgets extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(
-                              context, RouteName.kOpenTradeRoute);
+                        Navigator.pushNamed(context, RouteName.kProfileRoute);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate('profile_info'),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, RouteName.kOpenTradeRoute);
                       },
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -103,7 +136,8 @@ class DrawerWidgets extends StatelessWidget {
                             Expanded(
                               flex: 6,
                               child: Text(
-                                "Open Trade",
+                                AppLocalizations.of(context)
+                                    .translate('open_trades'),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -116,7 +150,10 @@ class DrawerWidgets extends StatelessWidget {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, RouteName.kPromoCampaignsRoute);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: Row(
@@ -125,14 +162,15 @@ class DrawerWidgets extends StatelessWidget {
                             Expanded(
                               flex: 3,
                               child: Icon(
-                                Icons.call,
+                                Icons.heat_pump_sharp,
                                 color: Colors.white,
                               ),
                             ),
                             Expanded(
                               flex: 6,
                               child: Text(
-                                "Contact Us",
+                                AppLocalizations.of(context)
+                                    .translate('promo_campaign'),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
