@@ -48,7 +48,7 @@ class RouteConfig {
   }
 
   static MaterialPageRoute _getSignInRoute() {
-    return _routeBuilder(const SignInScreen());
+    return _routeBuilder(SignInScreen());
   }
 
   static MaterialPageRoute _getProfileRoute() {
