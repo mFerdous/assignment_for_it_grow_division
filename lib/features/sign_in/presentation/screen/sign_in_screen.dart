@@ -24,50 +24,42 @@ class SignInScreen extends StatelessWidget {
     SizeConfig().init(context);
 
     return Scaffold(
-      appBar: TransparentAppBar(),
-      body: BlocBuilder<ValidationCubit, ValidationState>(
-        builder: (context, valState) {
-          return MultiBlocListener(
-            listeners: [
-              BlocListener<SignInApiCubit, SignInApiState>(
-                listener: (context, state) async {
-                  if (state is SignInLoading) {
-                    showAppLoading(context);
-                  } else if (state is SignInFailed) {
-                    Navigator.pop(context);
+        appBar: TransparentAppBar(),
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<SignInApiCubit, SignInApiState>(
+              listener: (context, state) async {
+                if (state is SignInLoading) {
+                  showAppLoading(context);
+                } else if (state is SignInFailed) {
+                  Navigator.pop(context);
 
-                    final ex = state.exception;
-                    if (ex is ServerException) {
-                      showAppDialog(context, title: ex.message ?? '');
-                    } else if (ex is NoInternetException) {
-                      showAppDialog(context, title: ErrorMsgRes.kNoInternet);
-                    }
-                  } else if (state is SignInSucceed) {
-                    Navigator.pop(context);
-                    final responseModel = state.model;
-
-                    if (responseModel.result == true) {
-                      Navigator.pushNamed(context, RouteName.kProfileRoute);
-
-                      // await context
-                      //     .read<ProfileInfoApiCubit>()
-                      //     .profileInfo(valState.getProfileInfoRequestModel());
-                    }
+                  final ex = state.exception;
+                  if (ex is ServerException) {
+                    showAppDialog(context, title: ex.message ?? '');
+                  } else if (ex is NoInternetException) {
+                    showAppDialog(context, title: ErrorMsgRes.kNoInternet);
                   }
-                },
-              ),
-            ],
-            child: _buildBody(context),
-          );
-        },
-      ),
-    );
+                } else if (state is SignInSucceed) {
+                  Navigator.pop(context);
+                  final responseModel = state.model;
+
+                  if (responseModel.result == true) {
+                    Navigator.pushNamed(context, RouteName.kProfileRoute);
+                  }
+                }
+              },
+            ),
+          ],
+          child: _buildBody(context),
+        ));
   }
 
   _buildBody(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Column(
+      child: ListView(
+        shrinkWrap: true,
         children: [
           Row(
             children: [
@@ -75,30 +67,21 @@ class SignInScreen extends StatelessWidget {
               _buildLanguageChangeButton(),
             ],
           ),
-          const Spacer(),
-          Center(
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                const AppLargeText(text: 'common_sign_in'),
-                const SizedBox(height: 15),
+          const AppLargeText(text: 'common_sign_in'),
+          const SizedBox(height: 15),
 
-                const SignInUserIdFeild(),
-                const SizedBox(height: 15),
+          const SignInUserIdFeild(),
+          const SizedBox(height: 15),
 
-                // password
-                const SignInPasswordField(),
-                const SizedBox(height: 15),
-                Row(
-                  children: [
-                    const Spacer(),
-                    _buildSignInButton(),
-                  ],
-                )
-              ],
-            ),
-          ),
-          const Spacer(),
+          // password
+          const SignInPasswordField(),
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              const Spacer(),
+              _buildSignInButton(),
+            ],
+          )
         ],
       ),
     );
